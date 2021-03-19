@@ -26,45 +26,35 @@ Things you may want to cover:
 
 ## users
 
-|Column     |Type      |Options
-|-----------|----------|----------
-|nickname   |string    |null:false
-|mail       |string    |null:false
-|password   |string    |null:false
-|name       |string    |null:false
-|name_kana  |string    |null:false
-|birthday   |date      |null:false
+|Column               |Type      |Options
+|---------------------|----------|-----------------------
+|nickname             |string    |null:false
+|mail                 |string    |null:false,unique:true
+|encrypted_password   |string    |null:false
+|family_name          |string   |null:false
+|first_name           |string   |null:false
+|birthday             |date     |null:false
 
 ### Association
-has_many :product
+has_many :products
 
 ## product
 
-|Column       |Type     |Options
-|-------------|---------|-----------
-|image        |         |
-|product_name |string   |null:false
-|description  |text     |null:false
-|details      |         |null:false
-|delivery_fee |         |null:false
-|area         |         |null:false
-|days         |         |null:false
-|price        |string   |null:false
-|user         |reference|foreign_key: true
+|Column          |Type     |Options
+|----------------|---------|-------------------
+|product_name    |string   |null:false
+|description     |text     |null:false
+|category_id     |integer  |null:false
+|detail_id       |integer  |null:false
+|delivery_fee_id |integer  |null:false
+|area            |integer  |null:false
+|days            |integer  |null:false
+|price           |integer  |null:false
+|user            |reference|foreign_key: true
+
 ### Association
 belongs_to :user
 
-
-## buys
-
-|Column          |Type     |Options
-|----------------|---------|-----------
-|card_number     |string   |null:false
-|expiration_date |string   |null:false
-|security        |string   |null:false
-
-### Association
-has_one :address
 
 ## address
 
@@ -74,8 +64,18 @@ Column           |Type     |Options
 |prefectures     |         |null:false
 |cities          |string   |null:false
 |house_number    |string   |null:false
-|building_name   |string   |null:false
+|building_name   |string   |
 |phone_number    |string   |null:false
 
 ### Association
-belongs_to :buys
+belongs_to :admin
+
+## admin
+
+Column   |Type      |Options
+|--------|----------|------------------
+|user    |reference |foreign_key: true
+|product |reference |foreign_key: true
+
+### Association
+has_one :address
