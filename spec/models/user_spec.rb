@@ -28,12 +28,12 @@ RSpec.describe User, type: :model do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include('Email has already been taken')
+        expect(another_user.errors.full_messages).to include("Email has already been taken")
       end
       it 'emailは、＠がないと登録できない' do
         @user.email = 'test.example'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Email is invalid')
+        expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it 'passwordが空だと登録できない' do
         @user.password = ''
@@ -69,6 +69,12 @@ RSpec.describe User, type: :model do
         @user.password_confirmation = 'abc111'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it 'passwordは、全角文字では登録できない' do
+        @user.password = 'ＡＡＡ１１１'
+        @user.password_confirmation = 'ＡＡＡ１１１'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'nicknameが空だと登録できない' do
         @user.nickname = ''
