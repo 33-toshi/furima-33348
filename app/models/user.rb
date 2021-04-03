@@ -17,4 +17,5 @@ class User < ApplicationRecord
     validates :birthday
     validates :password, :password_confirmation, format: {with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/ }
   end
+  has_many :products
 end
