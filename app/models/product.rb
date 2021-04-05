@@ -11,7 +11,7 @@ class Product < ApplicationRecord
       validates :area_id
       validates :duration_id
     end
-    validates :price
+    validates :price_before_type_cast, inclusion: { in: 300..9_999_999 }, format: {with: /\A[0-9]+\z/ }, numericality: true
     validates :image
   end
   
