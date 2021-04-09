@@ -55,22 +55,22 @@ RSpec.describe Product, type: :model do
       it 'priceがないと出品できない' do
         @product.price = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price before type cast can't be blank")
+        expect(@product.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceが￥300以下だと出品できない' do
         @product.price = 10
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price before type cast is not included in the list")
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
       it 'pirceが¥9,999,999以上だと出品できない' do
         @product.price = 10_000_000
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price before type cast is not included in the list")
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
       it 'priceが半角数字ではない' do
         @product.price = '１０００'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price before type cast is not included in the list")
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
 
       
