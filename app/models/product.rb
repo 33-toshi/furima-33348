@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   with_options presence: true do
     validates :product_name
     validates :description
-    validates :price, inclusion: { in: 300..9_999_999 }, format: {with: /\A[0-9]+\z/ }, numericality: true
+    validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }, numericality: true
     validates :image
   end
   with_options numericality: { other_than: 1 } do
@@ -14,7 +14,7 @@ class Product < ApplicationRecord
     validates :area_id
     validates :duration_id
   end
-  
+
   belongs_to :user
   has_one_attached :image
   belongs_to :category
