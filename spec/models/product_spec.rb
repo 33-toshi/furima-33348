@@ -27,27 +27,27 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Description can't be blank")
       end
-      it 'categoryの情報がないと出品できない' do
+      it 'categoryに１が選択されている場合出品できない' do
         @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Category must be other than 1")
       end
-      it 'detailの情報がないと出品できない' do
+      it 'detailに１が選択されている場合出品できない' do
         @product.detail_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Detail must be other than 1")
       end
-      it 'delivery_feeの情報がないと出品できない' do
+      it 'delivery_feeに１が選択されている場合出品できない' do
         @product.delivery_fee_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Delivery fee must be other than 1")
       end
-      it 'areaの情報がないと出品できない' do
+      it 'areaに１が選択されている場合出品できない' do
         @product.area_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Area must be other than 1")
       end
-      it 'durationの情報がないと出品できない' do
+      it 'durationに１が選択されている場合出品できない' do
         @product.duration_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Duration must be other than 1")
