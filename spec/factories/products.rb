@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :product do
-    product_name     {'test'}
-    description      {'testtesttest'}
-    category_id      {2}
-    detail_id        {2}
-    delivery_fee_id  {2}
-    area_id          {2}
-    duration_id      {2}
-    price            {1000}
-    
+    product_name     { 'test' }
+    description      { 'testtesttest' }
+    category_id      { 2 }
+    detail_id        { 2 }
+    delivery_fee_id  { 2 }
+    area_id          { 2 }
+    duration_id      { 2 }
+    price            { 1000 }
+
     association      :user
 
     after(:build) do |product|
