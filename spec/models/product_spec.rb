@@ -28,29 +28,29 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Description can't be blank")
       end
       it 'categoryの情報がないと出品できない' do
-        @product.category_id = ''
+        @product.category_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category can't be blank")
+        expect(@product.errors.full_messages).to include("Category must be other than 1")
       end
       it 'detailの情報がないと出品できない' do
-        @product.detail_id = ''
+        @product.detail_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Detail can't be blank")
+        expect(@product.errors.full_messages).to include("Detail must be other than 1")
       end
       it 'delivery_feeの情報がないと出品できない' do
-        @product.delivery_fee_id = ''
+        @product.delivery_fee_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Delivery fee can't be blank")
+        expect(@product.errors.full_messages).to include("Delivery fee must be other than 1")
       end
       it 'areaの情報がないと出品できない' do
-        @product.area_id = ''
+        @product.area_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Area can't be blank")
+        expect(@product.errors.full_messages).to include("Area must be other than 1")
       end
       it 'durationの情報がないと出品できない' do
-        @product.duration_id = ''
+        @product.duration_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Duration can't be blank")
+        expect(@product.errors.full_messages).to include("Duration must be other than 1")
       end
       it 'priceがないと出品できない' do
         @product.price = ''
@@ -62,17 +62,31 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
-      it 'pirceが¥9,999,999以上だと出品できない' do
+      it 'pirceが¥10,000,000以上だと出品できない' do
         @product.price = 10_000_000
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
-      it 'priceが半角数字ではない' do
+      it 'priceが半角数字ではないと登録できない' do
         @product.price = '１０００'
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
-
+      it 'priceは全角では登録できない' do
+        @product.price = '１０００'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
+      end
+      it 'priceは半角英数字混合では登録できない' do
+        @product.price = 'aa1000'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
+      end
+      it 'priceは半角英語だけでは登録できない' do
+        @product.price = 'abcde'
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
+      end
       
     end
   end
