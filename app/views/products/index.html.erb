@@ -127,30 +127,32 @@
     <ul class='item-lists'>
       <%# 商品情報一覧表示 %>
       <% @products.each do |item| %>
-      <li class='list'>
-        <div class='item-img-content'>
-          <%= image_tag item.image, class: "item-img" %>
-          <%# sold-out 商品購入機能実装後%>
-          <% if "#" %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
-          <% end %>
-        </div>
-        <div class='item-info'>
-          <h3 class='item-name'>
-            <%= item.product_name %>
-          </h3>
-          <div class='item-price'>
-            <span><%= item.price %>円<br><%= item.delivery_fee.name %></span>
-            <div class='star-btn'>
-              <%= image_tag "star.png", class:"star-icon" %>
-              <span class='star-count'>0</span>
+        <li class='list'>
+          <%= link_to product_path(item) do %>
+            <div class='item-img-content'>
+              <%= image_tag item.image, class: "item-img" %>
+              <%# sold-out 商品購入機能実装後%>
+              <% if "#" %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
             </div>
-          </div>
-        </div>
-        <% end %>
-      </li>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.product_name %>
+              </h3>
+              <div class='item-price'>
+                <span><%= item.price %>円<br><%= item.delivery_fee.name %></span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
       <%# ダミー表示 %>
       <li class='list'>
         <% if @products.length == 0 %>
