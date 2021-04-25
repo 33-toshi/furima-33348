@@ -5,7 +5,7 @@ RSpec.describe ProductOrder, type: :model do
     before do
       @product_order = FactoryBot.build(:product_order)
     end
-    it 'すべての入力が正しければ購入できる' do
+    it 'すべての入力とtokenが正しければ購入できる' do
       expect(@product_order).to be_valid
     end
     it 'postal_codeが空だと購入できない' do
@@ -42,6 +42,11 @@ RSpec.describe ProductOrder, type: :model do
       @product_order.phone_number = '12345678901234'
       @product_order.valid?
       expect(@product_order.errors.full_messages).to include("Phone number is invalid")
+    end
+    it 'tokenが空では購入できない' do
+      @product_order.token = nil
+      @product_order.valid?
+      expect(@product_order.errors.full_messages).to include("Token can't be blank")
     end
   end
 end
