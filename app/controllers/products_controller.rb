@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.order('created_at DESC')
-    
   end
 
   def new
@@ -49,13 +48,10 @@ class ProductsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in? && current_user.id == Product.find(params[:id]).user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless user_signed_in? && current_user.id == Product.find(params[:id]).user_id
   end
 
   def set_product
     @product = Product.find(params[:id])
   end
-
 end
