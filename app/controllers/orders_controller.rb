@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
 
+  
   def index
     @product = Product.find(params[:product_id])
     @product_order = ProductOrder.new
@@ -25,7 +26,7 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:product_order).permit(:postal_code, :area_id, :city, :house_number, :building_name, :phone_number).merge(token: params[:token])
+      params.require(:product_order).permit(:postal_code, :area_id, :city, :house_number, :building_name, :phone_number).merge(token: params[:token], user_id: current_user.id, product_id: params[:product_id] )
     end
 
     def pay_item
@@ -36,4 +37,5 @@ class OrdersController < ApplicationController
         currency: 'jpy'
       )
     end
+  
 end
