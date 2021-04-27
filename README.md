@@ -39,7 +39,7 @@ Things you may want to cover:
 
 ### Association
 has_many :products
-has_many :admins
+has_many :orders
 
 ## products
 
@@ -57,7 +57,7 @@ has_many :admins
 
 ### Association
 belongs_to :user
-has_many :admins
+has_many :orders
 
 
 ## addresses
@@ -70,12 +70,12 @@ Column           |Type      |Options
 |house_number    |string    |null:false
 |building_name   |string    |
 |phone_number    |string    |null:false
-|admin           |references|foreign_key: true
+|order           |references|foreign_key: true
 
 ### Association
-belongs_to :admin
+belongs_to :order
 
-## admins
+## orders
 
 Column   |Type       |Options
 |--------|-----------|------------------
