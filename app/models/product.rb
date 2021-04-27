@@ -22,5 +22,5 @@ class Product < ApplicationRecord
   belongs_to :delivery_fee
   belongs_to :area
   belongs_to :duration
-  has_many :order
+  has_many :orders
 end
