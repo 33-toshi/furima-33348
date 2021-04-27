@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    if @product.order.present?
+    if @product.orders.present?
       redirect_to root_path
     end
   end
