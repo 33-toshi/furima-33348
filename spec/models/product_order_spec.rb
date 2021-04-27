@@ -4,8 +4,8 @@ RSpec.describe ProductOrder, type: :model do
   before do
     user = FactoryBot.create( :user )
     product = FactoryBot.create( :product )
-    @product_order = FactoryBot.build(:product_order, user_id: user.id, product_id: product.id
-)
+    @product_order = FactoryBot.build(:product_order, user_id: user.id, product_id: product.id)
+    sleep(1)
   end
 
   describe '商品購入' do
@@ -64,6 +64,16 @@ RSpec.describe ProductOrder, type: :model do
         @product_order.token = nil
         @product_order.valid?
         expect(@product_order.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空では購入できない' do
+      @product_order.user_id = nil
+      @product_order.valid?
+      expect(@product_order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product-idが空では購入できない' do
+        @product_order.product_id = nil
+        @product_order.valid?
+        expect(@product_order.errors.full_messages).to include("Product can't be blank")
       end
     end
   end
