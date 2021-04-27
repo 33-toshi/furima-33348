@@ -1,18 +1,15 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_product, only: [:index, :create]
+  before_action :move_page, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
-
+  
   def index
     @product_order = ProductOrder.new
-    if current_user == @product.user
-      redirect_to root_path
-    end
   end
 
   def create
     @product_order = ProductOrder.new(order_params)
-
     if @product_order.valid?
       pay_item
       @product_order.save
@@ -45,6 +42,12 @@ class OrdersController < ApplicationController
 
   def move_to_index
     if @product.order.present?
+      redirect_to root_path
+    end
+  end
+
+  def move_page
+    if current_user == @product.user
       redirect_to root_path
     end
   end

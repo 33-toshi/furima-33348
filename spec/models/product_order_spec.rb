@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ProductOrder, type: :model do
   before do
-    @product_order = FactoryBot.build(:product_order)
+    user = FactoryBot.create( :user )
+    product = FactoryBot.create( :product )
+    @product_order = FactoryBot.build(:product_order, user_id: user.id, product_id: product.id
+)
   end
 
   describe '商品購入' do
@@ -48,7 +51,7 @@ RSpec.describe ProductOrder, type: :model do
         expect(@product_order.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberは半角ハイフン無しの11桁以内でないと購入できない' do
-        @product_order.phone_number = '12345678901234'
+        @product_order.phone_number = '123456789012'
         @product_order.valid?
         expect(@product_order.errors.full_messages).to include('Phone number is invalid')
       end
