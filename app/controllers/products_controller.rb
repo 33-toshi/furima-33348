@@ -20,10 +20,13 @@ class ProductsController < ApplicationController
     end
   end
 
-  def show
+  def show  
   end
 
   def edit
+    if @product.orders.present?
+      redirect_to root_path
+    end
   end
 
   def update
@@ -42,16 +45,18 @@ class ProductsController < ApplicationController
 
   private
 
+
   def product_params
     params.require(:product).permit(:product_name, :description, :category_id, :detail_id, :delivery_fee_id, :area_id,
                                     :duration_id, :price, :image).merge(user_id: current_user.id)
   end
 
   def move_to_index
-    redirect_to action: :index if current_user.id == Product.find(params[:id]).user_id
+    redirect_to action: :index unless current_user.id == Product.find(params[:id]).user_id 
   end
 
   def set_product
     @product = Product.find(params[:id])
   end
 end
+
