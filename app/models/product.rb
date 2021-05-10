@@ -4,10 +4,10 @@ class Product < ApplicationRecord
   with_options presence: true do
     validates :product_name
     validates :description
-    validates :price, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }, numericality: true
+    validates :price, inclusion: { in: 300..9_999_999 ,message: 'は300円〜9,999,999円で入力してください' }, format: { with: /\A[0-9]+\z/  }, numericality: true
     validates :image
   end
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1 , message:'を選択してください' }do
     validates :category_id
     validates :detail_id
     validates :delivery_fee_id
