@@ -1,0 +1,39 @@
+.AccountPage {
+  background-image: image-url('furima-header01.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5vh 0;
+}
+
+.AccountPage__title {
+  font-size: 5vh;
+  width: 100vw;
+  min-width: 1200px;
+  padding: 5vh 15vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Account__info {
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.submit_btn {
+  background-color: rgb(218, 214, 217);
+}
+
+.mypage_logout {
+  color: white;
+}
+
+.mypage_top {
+  color:white;
+}

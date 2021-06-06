@@ -72,3 +72,4 @@ gem "aws-sdk-s3", require: false
 gem 'payjp'
 gem 'rails-i18n'
 gem 'unicorn', '5.4.1'
+gem 'ransack'
